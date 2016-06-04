@@ -62,9 +62,15 @@ var App = React.createClass({
 
   render: function () {
     return (
-      <div>
-        <p>Your name:</p>
-        <input ref="name" onChange={this._onNameChange} />
+      <div className="content">
+        <h1>TRUMP NAMER<span className="small">.com</span></h1>
+        <h2 className="tagline">Discover your Trump name!</h2>
+
+        <span>Your name:</span>
+        <input ref="name" required={true} onChange={this._onNameChange} />
+
+        <p>Describe yourself:</p>
+
         {this.state.sliders.map(function (slider, idx) {
           return (<Slider
             key={slider.field}
@@ -72,7 +78,9 @@ var App = React.createClass({
             onChange={this._onChange.bind(this, idx)}
           />);
         }.bind(this))}
+
         <button onClick={this._onGenerate}>Generate</button>
+
         {this.state.adjective && (<Results
           name={this.state.name}
           adjective={this.state.adjective}
