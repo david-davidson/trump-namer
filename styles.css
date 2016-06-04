@@ -27,3 +27,13 @@ h1 {
   text-transform: uppercase;
   font-style: italic;
 }
+
+.trump-face {
+  width: 90%;
+}
+
+.results {
+  font-size: 35px;
+  font-weight: bold;
+  text-transform: uppercase;
+}

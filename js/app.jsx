@@ -51,12 +51,13 @@ var App = React.createClass({
       return memo + currentSlider.value;
     }, 0);
     var averageScore = totalScore / this.state.sliders.length;
-    var isTrumpApproved = averageScore > THRESHOLD;
-    var adjectiveOptions = isTrumpApproved ? adjectives.good : adjectives.bad;
+    var favorable = averageScore > THRESHOLD;
+    var adjectiveOptions = favorable ? adjectives.good : adjectives.bad;
     var adjectiveIndex = _getRandomIndex(adjectiveOptions.length - 1);
 
     this.setState({
-      adjective: adjectiveOptions[adjectiveIndex]
+      adjective: adjectiveOptions[adjectiveIndex],
+      favorable: favorable
     });
   },
 
@@ -82,6 +83,7 @@ var App = React.createClass({
         <button onClick={this._onGenerate}>Generate</button>
 
         {this.state.adjective && (<Results
+          favorable={this.state.favorable}
           name={this.state.name}
           adjective={this.state.adjective}
         />)}
