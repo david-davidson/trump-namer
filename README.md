@@ -5,4 +5,4 @@ npm install
 npm start
 ```
 
-To build `dist` JS: `npm build`.
+To build `dist` JS: `npm run build`.
