@@ -29,17 +29,16 @@ var App = React.createClass({
 
   _share: function () {
     var descriptionString = 'My Trump name is ' + this.state.adjective + ' ' + this.state.name + '!' +
-      '\nWhat\s yours? Learn at www.TrumpNamer.com';
-    var fullImagePath = 'http://www.trumpnamer.com' + this.state.imageSrc;
-    console.log(fullImagePath);
+      '\nWhat\s yours? Learn at TrumpNamer.com';
+    var fullImagePath = 'http://trumpnamer.com' + this.state.imageSrc;
 
     FB.ui({
       method: 'feed',
-      link: 'http://www.trumpnamer.com',
+      link: 'http://trumpnamer.com',
       description: descriptionString,
       caption: "Learn your Trump name at TrumpNamer.com",
       picture: fullImagePath
-    }, function(response){});
+    });
   },
 
   _onNameChange: function () {
@@ -51,10 +50,12 @@ var App = React.createClass({
 
   _onChange: function (clickedIdx, value) {
     var newSliders = this.state.sliders.map(function (slider, idx) {
-      if (idx === clickedIdx) {
-        slider.value = value;
+      return {
+        field: slider.field,
+        good: slider.good,
+        bad: slider.bad,
+        value: idx === clickedIdx ? value : slider.value
       };
-      return slider;
     });
 
     this.setState({
