@@ -1,4 +1,4 @@
-module.exports = [{
+export default [{
   field: "Energy",
   good: "High", 
   bad: "Low"

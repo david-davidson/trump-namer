@@ -3,9 +3,16 @@ import React from "react";
 import adjectives from "./adjectives";
 import Results from "./results";
 import Slider from "./slider";
+import trumpFaces from "./trump-image-paths";
 
 const THRESHOLD = 50;
+
 const _getRandomIndex = (max) => Math.floor(Math.random() * (max + 1));
+const _getRandomElement = (optionsConfig, isFavorable) => {
+  const options = isFavorable ? optionsConfig.good : optionsConfig.bad;
+  const randomIndex = _getRandomIndex(options.length - 1);
+  return options[randomIndex];
+};
 
 export default React.createClass({
 
@@ -37,18 +44,12 @@ export default React.createClass({
   _onGenerate() {
     const totalScore = this.state.sliders.reduce((memo, currentSlider) => memo + currentSlider.value, 0);
     const averageScore = totalScore / this.state.sliders.length;
-    const favorable = averageScore > THRESHOLD;
-    const adjectiveOptions = favorable ? adjectives.good : adjectives.bad;
-    const adjectiveIndex = _getRandomIndex(adjectiveOptions.length - 1);
-    const imageSrc = favorable ?
-      "/trump-good.jpg" :
-      "/trump-bad.jpg";
+    const isFavorable = averageScore > THRESHOLD;
 
-    this.setState({
-      adjective: adjectiveOptions[adjectiveIndex],
-      favorable,
-      imageSrc
-    });
+    const adjective = _getRandomElement(adjectives, isFavorable);
+    const imageSrc = _getRandomElement(trumpFaces, isFavorable);
+
+    this.setState({ adjective, isFavorable, imageSrc });
   },
 
   _onShare() {
@@ -88,7 +89,6 @@ export default React.createClass({
         <button onClick={this._onGenerate}>Generate</button>
 
         {this.state.adjective && (<Results
-          favorable={this.state.favorable}
           name={this.state.name}
           adjective={this.state.adjective}
           share={this._onShare}
