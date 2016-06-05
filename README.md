@@ -1,3 +1,6 @@
+# TrumpNamer.com
+The internet's most accurate Trump namer! Kick the tires at [http://trumpnamer.com/](http://trumpnamer.com/).
+
 ### To build locally:
 ```
 npm install
