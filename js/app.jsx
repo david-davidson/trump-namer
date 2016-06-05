@@ -26,6 +26,16 @@ var App = React.createClass({
     }
   },
 
+  _share: function () {
+    FB.ui({
+      method: 'feed',
+      link: 'http://www.trumpnamer.com',
+      caption: 'My Trump name is ' + this.state.adjective + ' ' + this.state.name + '!' +
+        '\nWhat\s yours? Learn at www.TrumpNamer.com',
+      picture: 'http://www.trumpnamer.com' + this.state.imageSrc
+    }, function(response){});
+  },
+
   _onNameChange: function () {
     var name = this.refs.name.getDOMNode().value;
     this.setState({
@@ -54,10 +64,14 @@ var App = React.createClass({
     var favorable = averageScore > THRESHOLD;
     var adjectiveOptions = favorable ? adjectives.good : adjectives.bad;
     var adjectiveIndex = _getRandomIndex(adjectiveOptions.length - 1);
+    var imageSrc = favorable ?
+      "/trump-good.jpg" :
+      "/trump-bad.jpg";
 
     this.setState({
       adjective: adjectiveOptions[adjectiveIndex],
-      favorable: favorable
+      favorable: favorable,
+      imageSrc: imageSrc
     });
   },
 
@@ -86,6 +100,8 @@ var App = React.createClass({
           favorable={this.state.favorable}
           name={this.state.name}
           adjective={this.state.adjective}
+          share={this._share}
+          imageSrc={this.state.imageSrc}
         />)}
       </div>
     );
