@@ -1,9 +1,9 @@
 import React from "react";
 
-import adjectives from "./adjectives";
+import adjectives from "../config/adjectives";
 import Results from "./results";
 import Slider from "./slider";
-import trumpFaces from "./trump-image-paths";
+import trumpFaces from "../config/trump-images";
 
 const THRESHOLD = 50;
 

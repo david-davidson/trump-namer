@@ -1,7 +1,7 @@
-var webpack = require('webpack');
-var _ = require('lodash');
+var webpack = require("webpack");
+var _ = require("lodash");
 
-module.exports = _.merge({}, require('./webpack.config.js'), {
+module.exports = _.merge({}, require("./webpack.config.js"), {
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
