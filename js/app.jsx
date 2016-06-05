@@ -52,7 +52,7 @@ export default React.createClass({
   },
 
   _onShare() {
-    const descriptionString = `My Trump name is ${this.state.adjective} ${this.state.name}!` +
+    const descriptionString = `My Trump name is ${this.state.adjective} ${this.state.name}! ` +
       `Learn yours at TrumpNamer.com`;
     const imagePath = `http://trumpnamer.com${this.state.imageSrc}`;
 
