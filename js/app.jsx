@@ -1,39 +1,43 @@
-import React from "react";
+import React, { Component, PropTypes } from "react";
 
 import Results from "./results";
 import Slider from "./slider";
 import trumpFaces from "../config/trump-images";
 
-const THRESHOLD = 50;
+const DEFAULT_THRESHOLD = 50;
 
 const _getRandomIndex = (max) => Math.floor(Math.random() * (max + 1));
-
 const _getRandomElement = (options) => {
   const randomIndex = _getRandomIndex(options.length - 1);
   return options[randomIndex];
 };
 
-export default React.createClass({
+class App extends Component {
 
   // --------------------------------------------------------------------------
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    ["_onNameChange", "_onSliderChange", "_onGenerate", "_onShare"].forEach((method) => {
+      this[method] = this[method].bind(this);
+    });
+
+    this.state = {
       name: "",
-      sliders: this.props.sliders.map((slider) => {
-        const threshold = slider.threshold || 50;
+      sliders: props.sliders.map((slider) => {
+        const threshold = slider.threshold || DEFAULT_THRESHOLD;
         const value = threshold;
         return { ...slider, ...{ threshold }, ...{ value } };
       })
     };
-  },
+  }
 
   // --------------------------------------------------------------------------
 
   _onNameChange() {
-    const name = this.refs.name.getDOMNode().value;
+    const name = this.refs.name.value;
     this.setState({ name });
-  },
+  }
 
   _onSliderChange(changedIdx, newValue) {
     const sliders = this.state.sliders.map((slider, idx) => {
@@ -42,7 +46,7 @@ export default React.createClass({
     });
 
     this.setState({ sliders });
-  },
+  }
 
   _onGenerate() {
     const adjectivePool = this.state.sliders.reduce((memo, slider) => {
@@ -65,7 +69,7 @@ export default React.createClass({
     const imageSrc = _getRandomElement(imagePool);
 
     this.setState({ adjective, imageSrc });
-  },
+  }
 
   _onShare() {
     const descriptionString = `My Trump name is ${this.state.adjective} ${this.state.name}! ` +
@@ -80,7 +84,7 @@ export default React.createClass({
       caption: "Learn your Trump name at TrumpNamer.com",
       picture: imagePath
     });
-  },
+  }
 
   // --------------------------------------------------------------------------
 
@@ -96,7 +100,6 @@ export default React.createClass({
         <p>Describe yourself:</p>
 
         {this.state.sliders.map((slider, idx) => (<Slider
-          value={slider.value}
           key={slider.field}
           config={slider}
           onChange={this._onSliderChange.bind(this, idx)}
@@ -107,11 +110,28 @@ export default React.createClass({
         {this.state.adjective && (<Results
           name={this.state.name}
           adjective={this.state.adjective}
-          share={this._onShare}
+          onShare={this._onShare}
           imageSrc={this.state.imageSrc}
         />)}
       </div>
     );
   }
+}
 
-});
+App.propTypes = {
+  name: PropTypes.string,
+  sliders: PropTypes.arrayOf(PropTypes.shape({
+    field: PropTypes.string.isRequired,
+    threshold: PropTypes.number,
+    good: PropTypes.shape({
+      text: PropTypes.string,
+      adjective: PropTypes.string
+    }).isRequired,
+    bad: PropTypes.shape({
+      text: PropTypes.string,
+      adjective: PropTypes.string
+    }).isRequired
+  })).isRequired
+}
+
+export default App;

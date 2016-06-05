@@ -1,6 +1,7 @@
 import React from "react";
+import ReactDOM from "react-dom";
 
 import App from "./app";
 import sliders from "../config/sliders";
 
-React.render(<App sliders={sliders} />, document.getElementById("app"));
+ReactDOM.render(<App sliders={sliders} />, document.getElementById("app"));
