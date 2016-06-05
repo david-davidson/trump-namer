@@ -1,5 +1,5 @@
 # TrumpNamer.com
-The internet's most accurate Trump namer! Kick the tires at [http://trumpnamer.com/](http://trumpnamer.com/).
+The internet's best Trump namer! Admire the clean, intuitive UI at [http://trumpnamer.com/](http://trumpnamer.com/).
 
 ### To build locally:
 ```
