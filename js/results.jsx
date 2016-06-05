@@ -10,7 +10,7 @@ var Results = React.createClass({
         </p>
         <h3 className="results">{this.props.adjective} {this.props.name}</h3>
         <p>Share your Trump name!!!</p>
-        <button onClick={this.props.share}>Share</button>
+        <button className="share" onClick={this.props.share}></button>
         <br />
         <img src={this.props.imageSrc} className="trump-face" />
       </div>

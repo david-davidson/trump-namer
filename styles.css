@@ -11,6 +11,18 @@ h1 {
   font-size: 30px;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
+button.share {
+  background: url(/share-button.png) no-repeat center center;
+  background-size: cover;
+  width: 200px;
+  height: 30px;
+  margin-bottom: 20px;
+}
+
 .content {
   width: 80%;
   margin: 0 auto;
