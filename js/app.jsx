@@ -31,14 +31,15 @@ var App = React.createClass({
     var descriptionString = 'My Trump name is ' + this.state.adjective + ' ' + this.state.name + '!' +
       '\nWhat\s yours? Learn at www.TrumpNamer.com';
     var fullImagePath = 'http://www.trumpnamer.com' + this.state.imageSrc;
+    console.log(fullImagePath);
 
     FB.ui({
       method: 'feed',
       link: 'http://www.trumpnamer.com',
       description: descriptionString,
-      caption: descriptionString,
+      caption: "Learn your Trump name at TrumpNamer.com",
       picture: fullImagePath
-    });
+    }, function(response){});
   },
 
   _onNameChange: function () {
