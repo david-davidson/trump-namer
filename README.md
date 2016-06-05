@@ -6,11 +6,9 @@ npm start # App served at localhost:8080
 ```
 
 To update copy/content:
-```
 * Add new sliders in `/js/slider-config.js`
 * Add new adjectives in `/js/adjectives/js`
 * App should include them automatically
-```
 
 To deploy:
 ```
