@@ -11,9 +11,9 @@ export default React.createClass({
     return (
       <div>
         <p>{this.props.config.field}</p>
-        <span>{this.props.config.bad}</span>
+        <span>{this.props.config.bad.text}</span>
         <input value={this.props.value} ref="input" onChange={this._onChange} type="range" />
-        <span>{this.props.config.good}</span>
+        <span>{this.props.config.good.text}</span>
       </div>
     );
   }

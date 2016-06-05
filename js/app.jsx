@@ -1,6 +1,5 @@
 import React from "react";
 
-import adjectives from "../config/adjectives";
 import Results from "./results";
 import Slider from "./slider";
 import trumpFaces from "../config/trump-images";
@@ -8,8 +7,8 @@ import trumpFaces from "../config/trump-images";
 const THRESHOLD = 50;
 
 const _getRandomIndex = (max) => Math.floor(Math.random() * (max + 1));
-const _getRandomElement = (optionsConfig, isFavorable) => {
-  const options = isFavorable ? optionsConfig.good : optionsConfig.bad;
+
+const _getRandomElement = (options) => {
   const randomIndex = _getRandomIndex(options.length - 1);
   return options[randomIndex];
 };
@@ -21,7 +20,11 @@ export default React.createClass({
   getInitialState() {
     return {
       name: "",
-      sliders: this.props.sliders.map((slider) => ({ ...slider, ...{ value: 50 } }))
+      sliders: this.props.sliders.map((slider) => {
+        const threshold = slider.threshold || 50;
+        const value = threshold;
+        return { ...slider, ...{ threshold }, ...{ value } };
+      })
     };
   },
 
@@ -42,14 +45,26 @@ export default React.createClass({
   },
 
   _onGenerate() {
-    const totalScore = this.state.sliders.reduce((memo, currentSlider) => memo + currentSlider.value, 0);
-    const averageScore = totalScore / this.state.sliders.length;
-    const isFavorable = averageScore > THRESHOLD;
+    const adjectivePool = this.state.sliders.reduce((memo, slider) => {
+      const isFavorable = slider.value > slider.threshold;
+      const extremityScore = Math.round(Math.abs(slider.value - slider.threshold) / 10);
 
-    const adjective = _getRandomElement(adjectives, isFavorable);
-    const imageSrc = _getRandomElement(trumpFaces, isFavorable);
+      for (let i = 0; i <= extremityScore; i++) {
+        memo.push({
+          adjective: isFavorable ? slider.good.adjective: slider.bad.adjective,
+          isFavorable
+        });
+      }
+      return memo;
+    }, []);
 
-    this.setState({ adjective, isFavorable, imageSrc });
+    const adjectiveObj = _getRandomElement(adjectivePool);
+    const adjective = adjectiveObj.adjective;
+    const isFavorable = adjectiveObj.isFavorable;
+    const imagePool = isFavorable ? trumpFaces.good : trumpFaces.bad;
+    const imageSrc = _getRandomElement(imagePool);
+
+    this.setState({ adjective, imageSrc });
   },
 
   _onShare() {
@@ -81,6 +96,7 @@ export default React.createClass({
         <p>Describe yourself:</p>
 
         {this.state.sliders.map((slider, idx) => (<Slider
+          value={slider.value}
           key={slider.field}
           config={slider}
           onChange={this._onSliderChange.bind(this, idx)}

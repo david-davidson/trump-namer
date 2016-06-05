@@ -8,8 +8,7 @@ npm start # App served at localhost:8080
 ```
 
 ### To update copy/content:
-* Add new sliders in `/config/sliders.js`
-* Add new adjectives in `/config/adjectives.js`
+* Add new sliders/adjectives in `/config/sliders.js`
 * Add new Trump faces in `/img`, and add their paths in `/config/trump-images.js`
 * App should update automatically!
 
