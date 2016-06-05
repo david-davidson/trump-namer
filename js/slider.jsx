@@ -1,20 +1,41 @@
-import React from "react";
+import React, { PropTypes } from "react";
 
-export default React.createClass({
-  
-  _onChange() {
-    const newValue = Number(this.refs.input.getDOMNode().value);
-    this.props.onChange(newValue);
-  },
+const Slider = ({ config, onChange }) => {
+  const { field, bad, good, value } = config;
+  let input;
 
-  render() {
-    return (
-      <div>
-        <p>{this.props.config.field}</p>
-        <span>{this.props.config.bad.text}</span>
-        <input value={this.props.value} ref="input" onChange={this._onChange} type="range" />
-        <span>{this.props.config.good.text}</span>
-      </div>
-    );
-  }
-});
+  const _onChange = () => {
+    const newValue = Number(input.value);
+    onChange(newValue);
+  };
+
+  return (
+    <div>
+      <p>{field}</p>
+      <span>{bad.text}</span>
+      <input
+        value={value}
+        ref={(domInput) => input = domInput}
+        onChange={_onChange}
+        type="range"
+      />
+      <span>{good.text}</span>
+    </div>
+  );
+};
+
+Slider.propTypes = {
+  config: PropTypes.shape({
+    field: PropTypes.string.isRequired,
+    value: PropTypes.number,
+    good: PropTypes.shape({
+      text: PropTypes.string
+    }).isRequired,
+    bad: PropTypes.shape({
+      text: PropTypes.string
+    }).isRequired
+  }).isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+export default Slider;
