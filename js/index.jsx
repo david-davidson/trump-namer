@@ -1,6 +1,6 @@
-var React = require('react');
+import React from "react";
 
-var App = require('./app');
-var sliders = require('./slider-config');
+import App from "./app";
+import sliders from "./slider-config";
 
-React.render(<App sliders={sliders} />, document.getElementById('app'));
+React.render(<App sliders={sliders} />, document.getElementById("app"));

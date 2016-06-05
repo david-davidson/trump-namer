@@ -1,105 +1,89 @@
-var React = require('react');
+import React from "react";
 
-var adjectives = require('./adjectives');
-var Results = require('./results');
-var Slider = require('./slider');
+import adjectives from "./adjectives";
+import Results from "./results";
+import Slider from "./slider";
 
-var THRESHOLD = 50;
+const THRESHOLD = 50;
+const _getRandomIndex = (max) => Math.floor(Math.random() * (max + 1));
 
-var _getRandomIndex = function (max) {
-  var min = 0;
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+export default React.createClass({
 
-var App = React.createClass({
+  // --------------------------------------------------------------------------
 
-  getInitialState: function () {
+  getInitialState() {
     return {
       name: "",
-      sliders: this.props.sliders.map(function (slider) {
-        return {
-          field: slider.field,
-          good: slider.good,
-          bad: slider.bad,
-          value: 50
-        }
-      })
-    }
+      sliders: this.props.sliders.map((slider) => ({ ...slider, ...{ value: 50 } }))
+    };
   },
 
-  _share: function () {
-    var descriptionString = 'My Trump name is ' + this.state.adjective + ' ' + this.state.name + '!' +
-      '\nWhat\s yours? Learn at TrumpNamer.com';
-    var fullImagePath = 'http://trumpnamer.com' + this.state.imageSrc;
+  // --------------------------------------------------------------------------
 
-    FB.ui({
-      method: 'feed',
-      link: 'http://trumpnamer.com',
-      description: descriptionString,
-      caption: "Learn your Trump name at TrumpNamer.com",
-      picture: fullImagePath
-    });
+  _onNameChange() {
+    const name = this.refs.name.getDOMNode().value;
+    this.setState({ name });
   },
 
-  _onNameChange: function () {
-    var name = this.refs.name.getDOMNode().value;
-    this.setState({
-      name: name
+  _onSliderChange(changedIdx, newValue) {
+    const sliders = this.state.sliders.map((slider, idx) => {
+      const value = idx === changedIdx ? newValue : slider.value;
+      return { ...slider, ...{ value } };
     });
+
+    this.setState({ sliders });
   },
 
-  _onChange: function (clickedIdx, value) {
-    var newSliders = this.state.sliders.map(function (slider, idx) {
-      return {
-        field: slider.field,
-        good: slider.good,
-        bad: slider.bad,
-        value: idx === clickedIdx ? value : slider.value
-      };
-    });
-
-    this.setState({
-      sliders: newSliders
-    });
-  },
-
-  _onGenerate: function () {
-    var totalScore = this.state.sliders.reduce(function (memo, currentSlider) {
-      return memo + currentSlider.value;
-    }, 0);
-    var averageScore = totalScore / this.state.sliders.length;
-    var favorable = averageScore > THRESHOLD;
-    var adjectiveOptions = favorable ? adjectives.good : adjectives.bad;
-    var adjectiveIndex = _getRandomIndex(adjectiveOptions.length - 1);
-    var imageSrc = favorable ?
+  _onGenerate() {
+    const totalScore = this.state.sliders.reduce((memo, currentSlider) => memo + currentSlider.value, 0);
+    const averageScore = totalScore / this.state.sliders.length;
+    const favorable = averageScore > THRESHOLD;
+    const adjectiveOptions = favorable ? adjectives.good : adjectives.bad;
+    const adjectiveIndex = _getRandomIndex(adjectiveOptions.length - 1);
+    const imageSrc = favorable ?
       "/trump-good.jpg" :
       "/trump-bad.jpg";
 
     this.setState({
       adjective: adjectiveOptions[adjectiveIndex],
-      favorable: favorable,
-      imageSrc: imageSrc
+      favorable,
+      imageSrc
     });
   },
 
-  render: function () {
+  _onShare() {
+    const descriptionString = `My Trump name is ${this.state.adjective} ${this.state.name}!` +
+      `Learn yours at TrumpNamer.com`;
+    const imagePath = `http://trumpnamer.com${this.state.imageSrc}`;
+
+    // `FB` is provided by the Facebook load script in index.html
+    FB.ui({
+      method: "feed",
+      link: "http://trumpnamer.com",
+      description: descriptionString,
+      caption: "Learn your Trump name at TrumpNamer.com",
+      picture: imagePath
+    });
+  },
+
+  // --------------------------------------------------------------------------
+
+  render() {
     return (
       <div className="content">
         <h1>TRUMP NAMER<span className="small">.com</span></h1>
         <h2 className="tagline">Discover your Trump name!</h2>
 
         <span>Your name:</span>
-        <input ref="name" required={true} onChange={this._onNameChange} />
+        <input ref="name" onChange={this._onNameChange} />
 
         <p>Describe yourself:</p>
 
-        {this.state.sliders.map(function (slider, idx) {
-          return (<Slider
-            key={slider.field}
-            config={slider}
-            onChange={this._onChange.bind(this, idx)}
-          />);
-        }.bind(this))}
+        {this.state.sliders.map((slider, idx) => (<Slider
+          key={slider.field}
+          config={slider}
+          onChange={this._onSliderChange.bind(this, idx)}
+        />))}
 
         <button onClick={this._onGenerate}>Generate</button>
 
@@ -107,7 +91,7 @@ var App = React.createClass({
           favorable={this.state.favorable}
           name={this.state.name}
           adjective={this.state.adjective}
-          share={this._share}
+          share={this._onShare}
           imageSrc={this.state.imageSrc}
         />)}
       </div>
@@ -115,5 +99,3 @@ var App = React.createClass({
   }
 
 });
-
-module.exports = App;

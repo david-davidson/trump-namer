@@ -1,13 +1,13 @@
-var React = require('react');
+import React from "react";
 
-var Slider = React.createClass({
+export default React.createClass({
   
-  _onChange: function () {
-    var value = Number(this.refs.input.getDOMNode().value);
-    this.props.onChange(value);
+  _onChange() {
+    const newValue = Number(this.refs.input.getDOMNode().value);
+    this.props.onChange(newValue);
   },
 
-  render: function () {
+  render() {
     return (
       <div>
         <p>{this.props.config.field}</p>
@@ -18,5 +18,3 @@ var Slider = React.createClass({
     );
   }
 });
-
-module.exports = Slider;

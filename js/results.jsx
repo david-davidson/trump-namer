@@ -1,8 +1,8 @@
-var React = require("react");
+import React from "react";
 
-var Results = React.createClass({
+export default React.createClass({
 
-  render: function () {
+  render() {
     return (
       <div>
         <p>
@@ -18,5 +18,3 @@ var Results = React.createClass({
   }
 
 });
-
-module.exports = Results;
