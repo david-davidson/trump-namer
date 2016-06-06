@@ -49,3 +49,32 @@ button.share {
   font-weight: bold;
   text-transform: uppercase;
 }
+
+.slider {
+  position: relative;
+  margin: 0 auto;
+  width: 200px;
+  margin-bottom: 40px;
+}
+
+.input {
+  width: 200px;
+}
+
+.input:hover {
+  cursor: pointer;
+}
+
+.pole {
+  position: absolute;
+  width: 100px;
+  top: 0;
+}
+
+.pole-bad {
+  right: 200px;
+}
+
+.pole-good {
+  left: 200px;
+}

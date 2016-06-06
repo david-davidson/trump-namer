@@ -12,14 +12,17 @@ const Slider = ({ config, onChange }) => {
   return (
     <div>
       <p>{field}</p>
-      <span>{bad.text}</span>
-      <input
-        value={value}
-        ref={(domInput) => input = domInput}
-        onChange={_onChange}
-        type="range"
-      />
-      <span>{good.text}</span>
+      <div className="slider">
+        <span className="pole pole-bad">{bad.text}</span>
+        <input
+          className="input"
+          value={value}
+          ref={(domInput) => input = domInput}
+          onChange={_onChange}
+          type="range"
+        />
+        <span className="pole pole-good">{good.text}</span>
+      </div>
     </div>
   );
 };
