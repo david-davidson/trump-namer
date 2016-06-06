@@ -19,9 +19,9 @@ export default [{
     text: "Useful",
 
     /**
-     * Required: corresponding adjective
+     * Required: corresponding adjectives
      */
-    adjective: "Puppet"
+    adjectives: ["Puppet", "Low-life", "Flimsy"]
   },
   good: {
 
@@ -31,119 +31,119 @@ export default [{
     text: "China is robbing us blind",
 
     /**
-     * Required: corresponding adjective
+     * Required: corresponding adjectives
      */
-    adjective: "Talented"
+    adjectives: ["Talented", "Credible", "I love"]
   }
 }, {
   field: "What do you think of the Republican party?",
   bad: {
     text: "Uneducated",
-    adjective: "Nasty"
+    adjectives: ["Nasty", "Elitist", "Ivory Tower"]
   },
   good: {
     text: "Stagnant, needs new leadership",
-    adjective: "Very persuasive"
+    adjectives: ["Very persuasive", "Beautiful", "Delightful"]
   }
 }, {
   field: "What do you think of the Democratic party?",
   bad: {
     text: "Reasonable and compassionate",
-    adjective: "Thuggish"
+    adjectives: ["Thuggish", "Slutty", "Hysterical"]
   },
   good: {
     text: "Socialists",
-    adjective: "Smart"
+    adjectives: ["Smart", "Tough", "No-nonsense"]
   }
 }, {
   field: "How do you feel about Obamacare?",
   bad: {
     text: "Good",
-    adjective: "Freeloading"
+    adjectives: ["Freeloading", "Hysterical", "Absolutely stupid"]
   },
   good: {
     text: "Angry",
-    adjective: "Tremendous"
+    adjectives: ["Tremendous", "Just phenomenal"]
   }
 }, {
   field: "What do you think of career politicians?",
   bad: {
     text: "Helpful",
-    adjective: "Fraudulent"
+    adjectives: ["Fraudulent", "Crooked", "Lyin'"]
   },
   good: {
     text: "All talk, no action",
-    adjective: "Magical"
+    adjectives: ["Magical"]
   }
 }, {
   field: "Rate your admiration of Donald J. Trump",
   bad: {
     text: "Several",
-    adjective: "Has-been"
+    adjectives: ["Has-been", "Dog-faced", "Unattractive"]
   },
   good: {
     text: "Many",
-    adjective: "Classy"
+    adjectives: ["Classy", "Genuine"]
   }
 }, {
   field: "How do you feel about hardworking job creators?",
   bad: {
     text: "They should be taxed more",
-    adjective: "Completely insignificant"
+    adjectives: ["Completely insignificant", "Completely moronic", "Entitled"]
   },
   good: {
     text: "They are heroes",
-    adjective: "Hard-hitting"
+    adjectives: ["Hard-hitting", "Gotta love"]
   }
 }, {
   field: "How should the president fix the economy?",
   bad: {
     text: "More programs",
-    adjective: "Puny"
+    adjectives: ["Puny", "Effete", "Dangerously incompetent"]
   },
   good: {
     text: "Less involvement",
-    adjective: "High-energy"
+    adjectives: ["High-energy", "Classy", "All-American"]
   }
 }, {
   field: "What is your size?",
   bad: {
     text: "Small",
-    adjective: "Wispy"
+    adjectives: ["Wispy", "Lightweight", "Four-eyes"]
   },
   good: {
     text: "Large",
-    adjective: "Robust"
+    adjectives: ["Robust", "Hard-hitting"]
   }
 }, {
   field: "How do you feel about taxes?",
   bad: {
     text: "Raise them",
-    adjective: "Freeloading"
+    adjectives: ["Freeloading", "Entitled", "Slacker"]
   },
   good: {
     text: "Lower them",
-    adjective: "Successful"
+    adjectives: ["Successful", "Terrific"]
   }
 }, {
   field: "What do you think of mainstream media coverage?",
   bad: {
     text: "Truthful",
-    adjective: "Soft"
+    adjectives: ["Soft", "Phony", "Failing"]
   },
   good: {
     text: "Dishonest",
-    adjective: "A lot of people like"
+    adjectives: ["Terrific"]
   }
 }, {
   field: "What is your nationality?",
   threshold: 80,
   good: {
     text: "American",
-    adjective: "Patriotic"
+    adjectives: ["Patriotic", "All-American"]
   },
   bad: {
     text: "Mexican",
-    adjective: "Weird European"
+    adjectives: ["Weird European", "Foreign"]
   }
 }];

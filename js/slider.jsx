@@ -32,10 +32,10 @@ Slider.propTypes = {
     field: PropTypes.string.isRequired,
     value: PropTypes.number,
     good: PropTypes.shape({
-      text: PropTypes.string
+      text: PropTypes.string.isRequired
     }).isRequired,
     bad: PropTypes.shape({
-      text: PropTypes.string
+      text: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
   onChange: PropTypes.func.isRequired

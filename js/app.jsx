@@ -56,7 +56,7 @@ class App extends Component {
 
       for (let i = 0; i <= extremityScore; i++) {
         memo.push({
-          adjective: isFavorable ? slider.good.adjective: slider.bad.adjective,
+          adjectives: isFavorable ? slider.good.adjectives: slider.bad.adjectives,
           isFavorable
         });
       }
@@ -67,8 +67,9 @@ class App extends Component {
     const isFavorable = adjectiveObj.isFavorable;
     const imagePool = isFavorable ? trumpFaces.good : trumpFaces.bad;
     const imageSrc = _getRandomElement(imagePool);
+    const adjectives = adjectiveObj.adjectives;
 
-    let adjective = adjectiveObj.adjective;
+    let adjective = _getRandomElement(adjectives);
     const name = this.state.name;
     if (name) {
       adjective = `${adjective} ${name}`;
@@ -134,12 +135,12 @@ App.propTypes = {
     field: PropTypes.string.isRequired,
     threshold: PropTypes.number,
     good: PropTypes.shape({
-      text: PropTypes.string,
-      adjective: PropTypes.string
+      text: PropTypes.string.isRequired,
+      adjectives: PropTypes.arrayOf(PropTypes.string).isRequired
     }).isRequired,
     bad: PropTypes.shape({
-      text: PropTypes.string,
-      adjective: PropTypes.string
+      text: PropTypes.string.isRequired,
+      adjectives: PropTypes.arrayOf(PropTypes.string).isRequired
     }).isRequired
   })).isRequired
 }
