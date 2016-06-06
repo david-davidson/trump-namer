@@ -21,6 +21,11 @@ footer p {
   margin: 0;
 }
 
+footer a {
+  color: white;
+  text-decoration: underline;
+}
+
 button:hover {
   cursor: pointer;
 }
