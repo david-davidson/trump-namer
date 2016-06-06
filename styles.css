@@ -11,6 +11,16 @@ h1 {
   font-size: 30px;
 }
 
+footer {
+  background-color: blue;
+  color: white;
+  margin-top: 10px;
+}
+
+footer p {
+  margin: 0;
+}
+
 button:hover {
   cursor: pointer;
 }
@@ -26,6 +36,7 @@ button.share {
 .content {
   width: 80%;
   margin: 0 auto;
+  padding-bottom: 10px;
   background: rgb(250, 250, 250);
   background: rgba(250, 250, 250, .8);
 }
