@@ -64,7 +64,8 @@ class App extends Component {
       const extremityScore =
       Math.round(
         Math.pow(
-          (Math.abs(slider.value - slider.threshold) / 10), 2
+          (Math.abs(slider.value - slider.threshold) / 10),
+          2
         )
       );
 
@@ -81,8 +82,8 @@ class App extends Component {
     const isFavorable = adjectiveObj.isFavorable;
     const imagePool = isFavorable ? trumpFaces.good : trumpFaces.bad;
     const imageSrc = _getRandomElement(imagePool);
-    const adjectives = adjectiveObj.adjectives;
 
+    const adjectives = adjectiveObj.adjectives;
     let adjective = _getRandomElement(adjectives);
     const name = this.state.name;
     if (name) {

@@ -73,7 +73,7 @@ export default [{
   },
   good: {
     text: "All talk, no action",
-    adjectives: ["Magical"]
+    adjectives: ["Magical", "Independent-minded"]
   }
 }, {
   field: "Rate your admiration of Donald J. Trump",
@@ -133,7 +133,7 @@ export default [{
   },
   good: {
     text: "Dishonest",
-    adjectives: ["Terrific"]
+    adjectives: ["Terrific", "Grade-A"]
   }
 }, {
   field: "What is your nationality?",
