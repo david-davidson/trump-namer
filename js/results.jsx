@@ -4,9 +4,8 @@ const Results = ({ adjective, imageSrc, name, onShare }) => {
   return (
     <div>
       <p>Your Trump name is:</p>
-      <h3 className="results">{adjective} {name}</h3>
+      <h3 className="results">"{adjective} {name}"</h3>
 
-      <p>Share your Trump name!!!</p>
       <button className="share" onClick={onShare}></button>
       <br />
 

@@ -96,8 +96,9 @@ class App extends Component {
 
         <span>Your name:</span>
         <input ref="name" onChange={this._onNameChange} />
+        <hr />
 
-        <p>Describe yourself:</p>
+        <p>Now describe yourself:</p>
 
         {this.state.sliders.map((slider, idx) => (<Slider
           key={slider.field}
