@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react";
 
+import Footer from "./footer";
 import Results from "./results";
 import Slider from "./slider";
 import trumpFaces from "../config/trump-images";
@@ -95,29 +96,33 @@ class App extends Component {
 
   render() {
     return (
-      <div className="content">
-        <h1>TRUMP NAMER<span className="small">.com</span></h1>
-        <h2 className="tagline">Discover your Trump name!</h2>
+      <div>
+        <div className="content">
+          <h1>TRUMP NAMER<span className="small">.com</span></h1>
+          <h2 className="tagline">Discover your Trump name!</h2>
 
-        <span>Your name:</span>
-        <input ref="name" onChange={this._onNameChange} />
-        <hr />
+          <span>Your name:</span>
+          <input ref="name" onChange={this._onNameChange} />
+          <hr />
 
-        <p>Now describe yourself:</p>
+          <p>Now describe yourself:</p>
 
-        {this.state.sliders.map((slider, idx) => (<Slider
-          key={slider.field}
-          config={slider}
-          onChange={this._onSliderChange.bind(this, idx)}
-        />))}
+          {this.state.sliders.map((slider, idx) => (<Slider
+            key={slider.field}
+            config={slider}
+            onChange={this._onSliderChange.bind(this, idx)}
+          />))}
 
-        <button onClick={this._onGenerate}>Generate</button>
+          <button onClick={this._onGenerate}>Generate</button>
 
-        {this.state.adjective && (<Results
-          adjective={this.state.adjective}
-          onShare={this._onShare}
-          imageSrc={this.state.imageSrc}
-        />)}
+          {this.state.adjective && (<Results
+            adjective={this.state.adjective}
+            onShare={this._onShare}
+            imageSrc={this.state.imageSrc}
+          />)}
+
+        </div>
+        <Footer />
       </div>
     );
   }
