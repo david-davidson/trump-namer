@@ -1,5 +1,5 @@
 # TrumpNamer.com
-The internet's best Trump namer! Admire the clean, intuitive UI at [http://trumpnamer.com/](http://trumpnamer.com/).
+The internet's best Trump namer! Admire it in all its hideous glory at [http://trumpnamer.com/](http://trumpnamer.com/).
 
 ### To build locally:
 ```
