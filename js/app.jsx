@@ -51,7 +51,7 @@ class App extends Component {
   _onGenerate() {
     const adjectivePool = this.state.sliders.reduce((memo, slider) => {
       const isFavorable = slider.value > slider.threshold;
-      const extremityScore = Math.round(Math.abs(slider.value - slider.threshold) / 10);
+      const extremityScore = Math.abs(slider.value - slider.threshold);
 
       for (let i = 0; i <= extremityScore; i++) {
         memo.push({
@@ -63,16 +63,21 @@ class App extends Component {
     }, []);
 
     const adjectiveObj = _getRandomElement(adjectivePool);
-    const adjective = adjectiveObj.adjective;
     const isFavorable = adjectiveObj.isFavorable;
     const imagePool = isFavorable ? trumpFaces.good : trumpFaces.bad;
     const imageSrc = _getRandomElement(imagePool);
+
+    let adjective = adjectiveObj.adjective;
+    const name = this.state.name;
+    if (name) {
+      adjective = `${adjective} ${name}`;
+    }
 
     this.setState({ adjective, imageSrc });
   }
 
   _onShare() {
-    const descriptionString = `My Trump name is ${this.state.adjective} ${this.state.name}! ` +
+    const descriptionString = `My Trump name is ${this.state.adjective}! ` +
       `Learn yours at TrumpNamer.com`;
     const imagePath = `http://trumpnamer.com${this.state.imageSrc}`;
 
@@ -109,7 +114,6 @@ class App extends Component {
         <button onClick={this._onGenerate}>Generate</button>
 
         {this.state.adjective && (<Results
-          name={this.state.name}
           adjective={this.state.adjective}
           onShare={this._onShare}
           imageSrc={this.state.imageSrc}

@@ -1,10 +1,10 @@
 import React, { PropTypes } from "react";
 
-const Results = ({ adjective, imageSrc, name, onShare }) => {
+const Results = ({ adjective, imageSrc, onShare }) => {
   return (
     <div>
       <p>Your Trump name is:</p>
-      <h3 className="results">"{adjective} {name}"</h3>
+      <h3 className="results">"{adjective}"</h3>
 
       <button className="share" onClick={onShare}></button>
       <br />
@@ -17,7 +17,6 @@ const Results = ({ adjective, imageSrc, name, onShare }) => {
 Results.propTypes = {
   adjective: PropTypes.string.isRequired,
   imageSrc: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
   onShare: PropTypes.func.isRequired,
 };
 
