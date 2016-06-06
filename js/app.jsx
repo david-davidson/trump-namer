@@ -61,8 +61,7 @@ class App extends Component {
 
     const adjectivePool = this.state.sliders.reduce((memo, slider) => {
       const isFavorable = slider.value > slider.threshold;
-      const extremityScore =
-      Math.round(
+      const extremityScore = Math.round(
         Math.pow(
           (Math.abs(slider.value - slider.threshold) / 10),
           2
