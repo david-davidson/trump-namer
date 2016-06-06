@@ -50,9 +50,23 @@ class App extends Component {
   }
 
   _onGenerate() {
+    // Adjective selection relies on the following algorithm, if you want to
+    // call it that: "extremity" is counted as distance (positive or negative)
+    // from the threshold (default: midpoint) of each slider. Each extremity
+    // score is divided by 10 and squared, such that a distance of 10 pts.
+    // from the threshold is worth only 1 extremity point, 20 is worth 4, 30
+    // is worth 9, etc. Then, we build an array of arrays of adjectives in which
+    // each slider's adjectives appear once for each extremity point, giving
+    // extra weight to extreme positions.
+
     const adjectivePool = this.state.sliders.reduce((memo, slider) => {
       const isFavorable = slider.value > slider.threshold;
-      const extremityScore = Math.abs(slider.value - slider.threshold);
+      const extremityScore =
+      Math.round(
+        Math.pow(
+          (Math.abs(slider.value - slider.threshold) / 10), 2
+        )
+      );
 
       for (let i = 0; i <= extremityScore; i++) {
         memo.push({
@@ -79,15 +93,14 @@ class App extends Component {
   }
 
   _onShare() {
-    const descriptionString = `My Trump name is ${this.state.adjective}! ` +
-      `Learn yours at TrumpNamer.com`;
+    const description = `My Trump name is ${this.state.adjective}! Learn yours at TrumpNamer.com`;
     const imagePath = `http://trumpnamer.com${this.state.imageSrc}`;
 
-    // `FB` is provided by the Facebook load script in index.html
+    // (`FB` is provided by the Facebook load script in index.html)
     FB.ui({
       method: "feed",
       link: "http://trumpnamer.com",
-      description: descriptionString,
+      description: description,
       caption: "Learn your Trump name at TrumpNamer.com",
       picture: imagePath
     });
