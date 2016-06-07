@@ -1,9 +1,12 @@
+import analytics from "react-ga";
 import React, { Component, PropTypes } from "react";
 
 import Footer from "./footer";
 import Results from "./results";
 import Slider from "./slider";
 import trumpFaces from "../config/trump-images";
+
+analytics.initialize("UA-36686836-2");
 
 const DEFAULT_THRESHOLD = 50;
 
@@ -90,6 +93,12 @@ class App extends Component {
     }
 
     this.setState({ adjective, imageSrc });
+
+    analytics.event({
+      category: "Interaction",
+      action: "Generated Trump name",
+      label: adjective
+    });
   }
 
   _onShare() {
@@ -103,6 +112,11 @@ class App extends Component {
       description: description,
       caption: "Learn your Trump name at TrumpNamer.com",
       picture: imagePath
+    });
+
+    analytics.event({
+      category: "Social",
+      action: "Opened Facebook share dialog"
     });
   }
 
