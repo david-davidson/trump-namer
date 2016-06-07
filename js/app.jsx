@@ -17,10 +17,12 @@ const _getRandomElement = (options) => {
 class App extends Component {
 
   // --------------------------------------------------------------------------
+  // Lifecycle
+  // --------------------------------------------------------------------------
 
   constructor(props) {
     super(props);
-    ["_onNameChange", "_onSliderChange", "_onGenerate", "_onShare"].forEach((method) => {
+    ["_onNameChange", "_onSliderChange", "_onGenerate", "_onFacebookShare"].forEach((method) => {
       this[method] = this[method].bind(this);
     });
 
@@ -32,12 +34,47 @@ class App extends Component {
         return { ...slider, ...{ threshold }, ...{ value } };
       })
     };
+
+    // (`twttr` is provided by the Twitter load script in index.html)
+    twttr.events.bind("click", this._logTwitterAnalytics);
   }
 
   componentDidMount() {
     analytics.pageview(window.location.pathname);
   }
 
+  // --------------------------------------------------------------------------
+  // Helpers
+  // --------------------------------------------------------------------------
+
+  _logFacebookAnalytics() {
+    analytics.event({
+      category: "Social",
+      action: "Opened Facebook share dialog"
+    });
+  }
+
+  _logTwitterAnalytics() {
+    analytics.event({
+      category: "Social",
+      action: "Opened Twitter share dialog"
+    });
+  }
+
+  _buildFacebookText() {
+    return `My Trump name is ${this.state.adjective}! Learn yours at TrumpNamer.com`;
+  }
+
+  _buildTwitterShareConfig() {
+    return {
+      text: `My Trump name is ${this.state.adjective}! Learn yours at trumpnamer.com`,
+      via: "realDonaldTrump",
+      hashtags: "Trump, TrumpNamer, Trump2016"
+    };
+  }
+
+  // --------------------------------------------------------------------------
+  // Events
   // --------------------------------------------------------------------------
 
   _onNameChange() {
@@ -52,6 +89,19 @@ class App extends Component {
     });
 
     this.setState({ sliders });
+  }
+
+  _onFacebookShare() {
+    this._logFacebookAnalytics();
+
+    // (`FB` is provided by the Facebook load script in index.html)
+    FB.ui({
+      method: "feed",
+      link: "http://trumpnamer.com",
+      description: this._buildFacebookText(),
+      caption: "Learn your Trump name at TrumpNamer.com",
+      picture: `http://trumpnamer.com${this.state.imageSrc}`
+    });
   }
 
   _onGenerate() {
@@ -103,25 +153,6 @@ class App extends Component {
     });
   }
 
-  _onShare() {
-    const description = `My Trump name is ${this.state.adjective}! Learn yours at TrumpNamer.com`;
-    const imagePath = `http://trumpnamer.com${this.state.imageSrc}`;
-
-    // (`FB` is provided by the Facebook load script in index.html)
-    FB.ui({
-      method: "feed",
-      link: "http://trumpnamer.com",
-      description: description,
-      caption: "Learn your Trump name at TrumpNamer.com",
-      picture: imagePath
-    });
-
-    analytics.event({
-      category: "Social",
-      action: "Opened Facebook share dialog"
-    });
-  }
-
   // --------------------------------------------------------------------------
 
   render() {
@@ -144,7 +175,8 @@ class App extends Component {
 
           {this.state.adjective && (<Results
             adjective={this.state.adjective}
-            onShare={this._onShare}
+            onFacebookShare={this._onFacebookShare}
+            twitterShareConfig={this._buildTwitterShareConfig()}
             imageSrc={this.state.imageSrc}
           />)}
 

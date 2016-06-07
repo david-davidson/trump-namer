@@ -34,12 +34,18 @@ button:hover {
   cursor: pointer;
 }
 
-button.share {
-  background: url(/img/share-button.png) no-repeat center center;
+button.fb-share {
+  background: url(/img/fb-share.png) no-repeat center center;
   background-size: cover;
   width: 200px;
   height: 30px;
-  margin-bottom: 20px;
+}
+
+button.twitter-share {
+  background: url(/img/twitter-share.png) no-repeat center center;
+  background-size: cover;
+  width: 200px;
+  height: 30px;
 }
 
 .content {
