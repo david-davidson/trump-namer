@@ -6,8 +6,6 @@ import Results from "./results";
 import Slider from "./slider";
 import trumpFaces from "../config/trump-images";
 
-analytics.initialize("UA-36686836-2");
-
 const DEFAULT_THRESHOLD = 50;
 
 const _getRandomIndex = (max) => Math.floor(Math.random() * (max + 1));
@@ -34,6 +32,8 @@ class App extends Component {
         return { ...slider, ...{ threshold }, ...{ value } };
       })
     };
+
+    analytics.pageview(window.location.pathname);
   }
 
   // --------------------------------------------------------------------------
