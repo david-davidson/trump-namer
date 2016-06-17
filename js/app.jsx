@@ -129,18 +129,15 @@ class App extends Component {
           <h1>TRUMP NAMER<span className="small">.com</span></h1>
           <h2 className="tagline">Discover your Trump name!</h2>
 
-          <span>Your name:</span>
-          <input ref="name" onChange={this._onNameChange} />
-          <hr />
-
-          <p>Now describe yourself:</p>
-
+          <p><strong>Describe yourself:</strong></p>
           {this.state.sliders.map((slider, idx) => (<Slider
             key={slider.field}
             config={slider}
             onChange={this._onSliderChange.bind(this, idx)}
           />))}
 
+          <span>Enter your name:</span>
+          <input ref="name" onChange={this._onNameChange} />
           <button onClick={this._onGenerate}>Generate</button>
 
           {this.state.adjective && (<Results
