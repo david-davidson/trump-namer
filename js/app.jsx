@@ -67,8 +67,7 @@ class App extends Component {
 
   _buildTwitterShareConfig() {
     return {
-      text: `My Trump name is ${this.state.adjective}! Learn yours at trumpnamer.com`,
-      via: "realDonaldTrump",
+      text: `.@realDonaldTrump would call me ${this.state.adjective}! What would he call you? => trumpnamer.com <=`,
       hashtags: "Trump, TrumpNamer, Trump2016"
     };
   }
