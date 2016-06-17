@@ -32,7 +32,9 @@ class App extends Component {
         return { ...slider, ...{ threshold }, ...{ value } };
       })
     };
+  }
 
+  componentDidMount() {
     analytics.pageview(window.location.pathname);
   }
 
