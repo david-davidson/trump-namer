@@ -18,7 +18,7 @@ const Results = ({ adjective, imageSrc, onFacebookShare, twitterShareConfig }) =
       <a href={twitterHref}><button className="twitter-share"></button></a>
       <br />
 
-      <img src={imageSrc} className="trump-face" />
+      <img src={`./img/${imageSrc}`} className="trump-face" />
     </div>
   );
 };
