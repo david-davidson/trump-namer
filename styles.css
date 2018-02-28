@@ -1,6 +1,6 @@
 body {
   text-align: center;
-  background: url(/img/flag.jpg) repeat center center fixed;
+  background: url(./trump-namer/img/flag.jpg) repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -35,14 +35,14 @@ button:hover {
 }
 
 button.fb-share {
-  background: url(/img/fb-share.png) no-repeat center center;
+  background: url(./trump-namer/fb-share.png) no-repeat center center;
   background-size: cover;
   width: 200px;
   height: 30px;
 }
 
 button.twitter-share {
-  background: url(/img/twitter-share.png) no-repeat center center;
+  background: url(./trump-namer/twitter-share.png) no-repeat center center;
   background-size: cover;
   width: 200px;
   height: 30px;

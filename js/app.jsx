@@ -99,7 +99,7 @@ class App extends Component {
       link: "http://trumpnamer.com",
       description: this._buildFacebookText(),
       caption: "Learn your Trump name at TrumpNamer.com",
-      picture: `./img/${this.state.imageSrc}`
+      picture: `https://david-davidson.github.io/trump-namer/img/${this.state.imageSrc}`
     });
   }
 
